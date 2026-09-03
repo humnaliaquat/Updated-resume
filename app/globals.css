@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --mono: var(--font-mono), ui-monospace, monospace;
+  --sans: var(--font-sans), system-ui, sans-serif;
+  /* Backgrounds */
+  --bg: #0e1210; /* page background — near-black charcoal, not pure black */
+  --surface: #161b17; /* card backgrounds — project cards, skills box, comment block, contact box */
+  --surface-2: #1d231e; /* lighter surface tier for nested panels (not yet used) */
+  --line: #2a322b; /* borders, dividers, section top-borders, separators */
+
+  /* Text */
+  --text: #e9ece7; /* primary text — headings, body copy, active nav links */
+  --text-muted: #8b958a; /* secondary text — descriptions, subtext, inactive nav links */
+  --text-faint: #5b655c; /* tertiary text — labels, eyebrows, faint markers */
+
+  /* Accent — "addition" (green) */
+  --add: #7fb88f; /* buttons, links on hover, active states, cursor blink, dot markers */
+  --add-dim: rgba(
+    127,
+    184,
+    143,
+    0.12
+  ); /* background wash behind "added" diff lines, selection highlight, dot-grid texture */
+
+  /* Accent — "deletion" (red) */
+  --del: #c1665a; /* struck-through text, badges */
+  --del-dim: rgba(
+    193,
+    102,
+    90,
+    0.12
+  ); /* background wash behind "removed" diff lines, badge background */
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(127, 184, 143, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 184, 143, 0.025) 1px, transparent 1px);
+  background-size: 42px 42px;
+  z-index: 0;
+}
