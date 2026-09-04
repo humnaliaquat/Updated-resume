@@ -17,7 +17,7 @@ export default function HeroSection() {
     },
   ];
   return (
-    <section className="px-52 py-5 mt-20 mb-15 flex flex-col">
+    <section className="px-52 py-5 mt-20  flex flex-col">
       {" "}
       {/* Label */}{" "}
       <div
@@ -65,7 +65,7 @@ export default function HeroSection() {
         {" "}
         <p>
           {" "}
-          I'm Hamna — a BSCS student who builds with the{" "}
+          I'm Hamna, a BSCS graduate who builds with the{" "}
           <span className="text-(--text) font-semibold">
             {" "}
             MERN stack and TypeScript{" "}
