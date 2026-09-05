@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <section
       id="contact"
-      className="flex flex-col px-4 sm:px-6 md:px-10 lg:px-52 mb-10 sm:mb-14 mt-12"
+      className="flex flex-col px-4  mb-10 sm:mb-14 mt-12"
     >
       {/* CTA */}
       <div
