@@ -2,18 +2,20 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { Playfair_Display, Google_Sans } from "next/font/google";
+import MouseFollower from "@/components/MouseFollower";
 
-export const plexMono = IBM_Plex_Mono({
+const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-mono",
+  variable: "--font-playfair",
+  display: "swap",
 });
 
-export const plexSans = IBM_Plex_Sans({
+const googleSans = Google_Sans({
+  variable: "--font-manrope",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,13 +25,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${plexMono.variable} ${plexSans.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${googleSans.className}  h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         {" "}
         <Navbar />
+        <MouseFollower />
         {children}
       </body>
     </html>

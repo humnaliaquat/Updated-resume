@@ -1,137 +1,257 @@
+"use client";
+
 import React from "react";
-import { plexMono } from "./HeroSection";
-import Link from "next/link";
-import { MoveUpRight } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { Playfair_Display } from "next/font/google";
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-playfair",
+  display: "swap",
+});
 
 export default function Footer() {
   return (
     <section
       id="contact"
-      className="flex flex-col px-4  mb-10 sm:mb-14 mt-12"
+      className="
+      pt-10
+        px-5
+        sm:px-8
+        md:px-12
+        lg:px-28
+      "
     >
-      {/* CTA */}
-      <div
-        className="
-          z-20
-          flex flex-col items-center justify-center
-          gap-3
-          rounded-xl
-          border border-(--line)
-          bg-(--surface)
-          px-5 py-10
-          sm:px-8 sm:py-12
-        "
-      >
-        <h1
-          className={`
-            ${plexMono.className}
-            text-center
-            text-xl sm:text-2xl
-            font-bold
-            text-(--text)
-          `}
-        >
-          Let's build something.
-        </h1>
+      {/* Section heading */}
+      <div className="flex items-center gap-5">
+        <span className="shrink-0 text-sm text-(--muted)">Contact</span>
 
-        <p
+        <div className="h-px flex-1 bg-(--muted)/25" />
+      </div>
+
+      {/* Main content */}
+      <div className="relative mt-20 overflow-hidden">
+        {/* Background number */}
+        <span
           className="
-            max-w-2xl
-            text-center
-            text-xs sm:text-sm
-            leading-5 sm:leading-6
-            text-(--text-muted)
+            pointer-events-none
+            absolute
+            -right-2
+            -top-12
+            font-(family-name:--font-playfair)
+            text-[180px]
+            leading-none
+            text-(--muted)/5
+            md:text-[260px]
           "
         >
-          Looking for a web development internship or a full-time position.
-          Happy to talk about MERN, AI integration, or anything in between.
-        </p>
+          03
+        </span>
 
-        {/* Buttons */}
-        <div
-          className="
-            mt-4
-            flex w-full
-            flex-col
-            items-stretch
-            justify-center
-            gap-3
-            sm:w-auto
-            sm:flex-row
-            sm:items-center
-          "
-        >
-          <Link
+        <div className="relative">
+          {/* Small label */}
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-(--brass)" />
+
+            <span
+              className="
+                text-[10px]
+                uppercase
+                tracking-[0.25em]
+                text-(--brass)
+              "
+            >
+              Let's connect
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2
+            className={` ${playfair.className} mt-7
+              max-w-4xl
+              font-(family-name:--font-playfair)
+              text-4xl
+              leading-[1.08]
+              text-(--ink)
+              sm:text-5xl
+              md:text-7xl`}
+          >
+            Have a project in mind?
+            <br />
+            <span className="text-(--muted)">
+              Let's build something useful.
+            </span>
+          </h2>
+
+          {/* Description */}
+          <p
+            className="
+              mt-8
+              max-w-lg
+              text-sm
+              leading-7
+              text-(--muted)
+              md:text-[15px]
+            "
+          >
+            I'm currently open to web development internships and opportunities
+            to work on thoughtful digital products. If you'd like to work
+            together, I'd love to hear from you.
+          </p>
+
+          {/* Email CTA */}
+          <a
             href="mailto:hamnaliaqat24@gmail.com"
             className="
-              flex items-center justify-center gap-2
-              rounded-lg
-              bg-(--add)
-              px-5 py-3
-              text-sm font-medium
-              text-(--bg)
-              transition-all duration-300
-              hover:-translate-y-1
+              group
+              mt-12
+              flex
+              w-fit
+              items-center
+              gap-4
+              border-b
+              border-(--ink)/25
+              pb-3
+              text-base
+              text-(--ink)
+              transition-all
+              duration-300
+              hover:border-(--brass)
+              hover:text-(--brass)
+              md:text-lg
             "
           >
-            Email me
-          </Link>
+            <span
+              className="
+                flex
+                h-9
+                w-9
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-(--muted)/20
+                transition-all
+                duration-300
+                group-hover:border-(--brass)
+                group-hover:bg-(--brass)
+                group-hover:text-(--panel)
+              "
+            >
+              <Mail size={16} strokeWidth={1.4} />
+            </span>
 
-          <Link
-            href="https://www.linkedin.com/in/hamna-liaquat-9b51a2275/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              flex items-center justify-center gap-2
-              rounded-lg
-              border border-(--line)
-              px-5 py-3
-              text-sm font-medium
-              text-(--text)
-              transition-all duration-300
-              hover:-translate-y-1
-              hover:border-(--add)
-              hover:text-(--add)
-            "
-          >
-            LinkedIn
-            <MoveUpRight className="h-3 w-3" />
-          </Link>
+            <span>hamnaliaqat24@gmail.com</span>
 
-          <Link
-            href="https://github.com/humnaliaquat"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              flex items-center justify-center gap-2
-              rounded-lg
-              border border-(--line)
-              px-5 py-3
-              text-sm font-medium
-              text-(--text)
-              transition-all duration-300
-              hover:-translate-y-1
-              hover:border-(--add)
-              hover:text-(--add)
-            "
-          >
-            GitHub
-            <MoveUpRight className="h-3 w-3" />
-          </Link>
+            <ArrowUpRight
+              size={18}
+              strokeWidth={1.4}
+              className="
+                transition-transform
+                duration-300
+                group-hover:translate-x-1
+                group-hover:-translate-y-1
+              "
+            />
+          </a>
         </div>
       </div>
 
-      {/* Copyright */}
+      {/* Bottom */}
       <div
-        className={`
-          ${plexMono.className}
-          mt-6
-          text-center
-          text-[10px] sm:text-xs
-          text-(--text-muted)
-        `}
+        className="
+          mt-28
+          border-t
+          border-(--muted)/20
+          pt-6
+        "
       >
-        built by Hamna · {new Date().getFullYear()}
+        <div
+          className="
+            flex
+            flex-col
+            gap-5
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          {/* Copyright */}
+          <div className="flex items-center gap-3">
+            <span className="h-1.5 w-1.5 rounded-full bg-(--brass)" />
+
+            <span className="text-xs text-(--muted)">
+              © {new Date().getFullYear()} Hamna Liaquat
+            </span>
+          </div>
+
+          {/* Social links */}
+          <div className="flex items-center gap-7">
+            <a
+              href="https://github.com/humnaliaquat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex
+                items-center
+                gap-2
+                text-xs
+                text-(--muted)
+                transition-colors
+                duration-300
+                hover:text-(--brass)
+              "
+            >
+              <FaGithub size={14} />
+              GitHub
+            </a>
+
+            <a
+              href="https://linkedin.com/in/hamna-liaquat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex
+                items-center
+                gap-2
+                text-xs
+                text-(--muted)
+                transition-colors
+                duration-300
+                hover:text-(--brass)
+              "
+            >
+              <FaLinkedinIn size={14} />
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+        {/* Tiny closing line */}
+        <div className="mt-10 flex items-center justify-between">
+          <span
+            className="
+              text-[9px]
+              uppercase
+              tracking-[0.25em]
+              text-(--muted)/40
+            "
+          >
+            Designed & built with intention
+          </span>
+
+          <span
+            className="
+              text-[9px]
+              uppercase
+              tracking-[0.25em]
+              text-(--muted)/40
+            "
+          >
+            Lahore · Pakistan
+          </span>
+        </div>
       </div>
     </section>
   );

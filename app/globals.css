@@ -1,52 +1,182 @@
 @import "tailwindcss";
 
 :root {
-  --mono: var(--font-mono), ui-monospace, monospace;
-  --sans: var(--font-sans), system-ui, sans-serif;
-  /* Backgrounds */
-  --bg: #0e1210; /* page background — near-black charcoal, not pure black */
-  --surface: #161b17; /* card backgrounds — project cards, skills box, comment block, contact box */
-  --surface-2: #1d231e; /* lighter surface tier for nested panels (not yet used) */
-  --line: #2a322b; /* borders, dividers, section top-borders, separators */
+  /* ---- color tokens ---- */
+  --bg: #000000; /* page background */
+  --panel: #0c0c0d; /* card / screenshot panel background */
+  --line: #1c1c1e; /* hairline borders, dividers */
+  --line-2: #2a2a2d; /* brighter border on hover */
+  --ink: #f4f2ed; /* main text (off-white) */
+  --muted: #8c8c87; /* secondary text */
+  --dim: #63635f; /* tertiary text (dates, meta labels) */
+  --brass: #d7b273; /* accent — links, hover states, highlights */
 
-  /* Text */
-  --text: #e9ece7; /* primary text — headings, body copy, active nav links */
-  --text-muted: #8b958a; /* secondary text — descriptions, subtext, inactive nav links */
-  --text-faint: #5b655c; /* tertiary text — labels, eyebrows, faint markers */
+  /* font sizes — fluid, scale with viewport */
+  --fs-hero: clamp(46px, 8.6vw, 108px); /* page name / big headline */
+  --fs-display: clamp(36px, 6.4vw, 70px); /* footer / section closers */
+  --fs-h2: clamp(26px, 3.6vw, 40px); /* about-style headline */
+  --fs-h3: clamp(27px, 3.4vw, 38px); /* project / card titles */
+  --fs-lede: clamp(17px, 2vw, 20px); /* intro paragraph */
+  --fs-body: 17px; /* default body text */
+  --fs-small: 15px; /* nav links */
+  --fs-meta: 13.5px; /* dates, labels */
+  --fs-tag: 12.5px; /* pill tags */
 
-  /* Accent — "addition" (green) */
-  --add: #7fb88f; /* buttons, links on hover, active states, cursor blink, dot markers */
-  --add-dim: rgba(
-    127,
-    184,
-    143,
-    0.12
-  ); /* background wash behind "added" diff lines, selection highlight, dot-grid texture */
+  /* font weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extra: 800;
 
-  /* Accent — "deletion" (red) */
-  --del: #c1665a; /* struck-through text, badges */
-  --del-dim: rgba(
-    193,
-    102,
-    90,
-    0.12
-  ); /* background wash behind "removed" diff lines, badge background */
+  /* layout */
+  --maxw: 1120px;
 }
 
+:root:not([data-theme="light"]) {
+  color-scheme: dark;
+}
+
+/* ---- reset / base ---- */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+/* h1 {
+  font-size: var(--fs-hero);
+} */
+::selection {
+  background: var(--brass);
+  color: #000;
+}
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+  border-radius: 5px;
 }
 
-body::before {
+/* ---- shared utility classes ---- */
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.text-muted {
+  color: var(--muted);
+}
+.text-dim {
+  color: var(--dim);
+}
+.text-brass {
+  color: var(--brass);
+}
+.intro-paragraph {
+  font-size: var(--fs-lede);
+}
+.tag {
+  font-size: var(--fs-tag);
+  color: #cfcbc2;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 11px;
+  display: inline-block;
+}
+
+.btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: var(--fs-small);
+  transition:
+    border-color 0.22s,
+    color 0.22s,
+    background 0.22s,
+    transform 0.22s;
+}
+.btn:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+  transform: translateY(-1px);
+}
+
+.btn-solid {
+  background: var(--ink);
+  color: #000;
+  border-color: var(--ink);
+  font-weight: var(--fw-semibold);
+}
+.btn-solid:hover {
+  background: var(--brass);
+  border-color: var(--brass);
+  color: #000;
+}
+
+/* underline-sweep link */
+.link-sweep {
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+}
+.link-sweep::after {
   content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(127, 184, 143, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(127, 184, 143, 0.025) 1px, transparent 1px);
-  background-size: 42px 42px;
-  z-index: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-sweep:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* scroll-reveal (pair with the IntersectionObserver snippet below) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .rise {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+.hero-title {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+}
+.hero-title2 {
+  font-size: var(--fs-hero);
 }
